@@ -33,16 +33,8 @@ class Solution(object):
         return ''.join(rows)
 
 
-def stringToString(input):
-    return input[1:-1].decode('string_escape')
-
-
-def stringToInt(input):
-    return int(input)
-
-
 def main():
-    print(Solution().convert(s, numRows))
+    print(Solution().convert("PAYPALISHIRING", 4))
 
 
 if __name__ == '__main__':
