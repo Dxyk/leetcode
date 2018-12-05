@@ -44,40 +44,48 @@ class Solution:
         """
         if num < 1 or num >= 4000:
             return ""
-        int_to_roman_dict = {
-            1: "I",
-            5: "V",
-            10: "X",
-            50: "L",
-            100: "C",
-            500: "D",
-            1000: "M"
-        }
-        dividers = [1000, 100, 10, 1]
-        result = ""
-        # use max_divider to reduce time
-        while num != 0:
-            for idx in range(len(dividers)):
-                divider = dividers[idx]
-                curr_roman = int_to_roman_dict[divider]
-                if num // divider != 0:
-                    if num // divider == 9:
-                        result += curr_roman
-                        result += int_to_roman_dict[divider * 10]
-                        num -= divider * 9
-                    elif num // divider // 5 != 0:
-                        result += int_to_roman_dict[divider * 5]
-                        num -= divider * 5
-                    elif num // divider == 4:
-                        result += curr_roman
-                        result += int_to_roman_dict[divider * 5]
-                        num -= divider * 4
-                    else:
-                        result += curr_roman
-                        num -= divider
-
-                    break
-        return result
+        # int_to_roman_dict = {
+        #     1: "I",
+        #     5: "V",
+        #     10: "X",
+        #     50: "L",
+        #     100: "C",
+        #     500: "D",
+        #     1000: "M"
+        # }
+        # dividers = [1000, 100, 10, 1]
+        # result = ""
+        # # use max_divider to reduce time
+        # while num != 0:
+        #     for idx in range(len(dividers)):
+        #         divider = dividers[idx]
+        #         curr_roman = int_to_roman_dict[divider]
+        #         if num // divider != 0:
+        #             if num // divider == 9:
+        #                 result += curr_roman
+        #                 result += int_to_roman_dict[divider * 10]
+        #                 num -= divider * 9
+        #             elif num // divider // 5 != 0:
+        #                 result += int_to_roman_dict[divider * 5]
+        #                 num -= divider * 5
+        #             elif num // divider == 4:
+        #                 result += curr_roman
+        #                 result += int_to_roman_dict[divider * 5]
+        #                 num -= divider * 4
+        #             else:
+        #                 result += curr_roman
+        #                 num -= divider
+        #
+        #             break
+        # return result
+        """ a better python approach """
+        values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        numerals = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        res = ""
+        for n, v in zip(numerals, values):
+            res += (num // v) * n
+            num %= v
+        return res
 
 
 def main():
