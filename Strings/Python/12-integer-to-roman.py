@@ -44,15 +44,7 @@ class Solution:
         """
         if num < 1 or num >= 4000:
             return ""
-        # int_to_roman_dict = {
-        #     1: "I",
-        #     5: "V",
-        #     10: "X",
-        #     50: "L",
-        #     100: "C",
-        #     500: "D",
-        #     1000: "M"
-        # }
+        # int_to_roman_dict = {1: 'I', 5: 'V', 10: 'X', 50: 'L', 100: 'C', 500: 'D', 1000: 'M'}
         # dividers = [1000, 100, 10, 1]
         # result = ""
         # # use max_divider to reduce time
@@ -94,5 +86,6 @@ def main():
 
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()
     # main()
