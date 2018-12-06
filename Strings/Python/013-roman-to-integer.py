@@ -53,12 +53,6 @@ class Solution:
         return result
 
 
-def stringToString(input):
-    import json
-
-    return json.loads(input)
-
-
 def main():
     print(Solution().romanToInt(""))
 
