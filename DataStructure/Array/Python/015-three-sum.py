@@ -27,32 +27,33 @@ class Solution:
     def two_pointer_soln(self, nums: List[int]) -> List[List[int]]:
         """
         T: O(n^2)
+        We fix the left most ptr (i) each time. Use two pointers (left, right) to narrow the interval down based on the sum of the two pointers and i.
+        Note: there may be multiple solutions corresponding to each i.
+        Note: we skip the same numbers to avoid duplicated results
 
         :param nums: the list of all integers
         :return: the list of all three sums that adds up to 0
         """
         result = []
-        sorted_nums = sorted(nums)  # O(nlogn)
-
-        for i in range(len(sorted_nums) - 2):
-            if i > 0 and sorted_nums[i] == sorted_nums[i - 1]:
+        nums.sort()
+        for i in range(len(nums) - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
                 continue
-            left_idx, right_idx = i + 1, len(sorted_nums) - 1
-            while left_idx < right_idx:
-                a, b, c = sorted_nums[i], sorted_nums[left_idx], sorted_nums[right_idx]
-                s = a + b + c
-                if s == 0:
-                    result.append([a, b, c])
-                    left_idx += 1
-                    right_idx -= 1
-                    while left_idx < right_idx and sorted_nums[left_idx] == sorted_nums[left_idx - 1]:
-                        left_idx += 1
-                    while left_idx < right_idx and sorted_nums[right_idx] == sorted_nums[right_idx - 1]:
-                        right_idx -= 1
-                elif s < 0:
-                    left_idx += 1
+            left, right = i + 1, len(nums) - 1
+            while left < right:
+                s = nums[i] + nums[left] + nums[right]
+                if s < 0:
+                    left += 1
+                elif s > 0:
+                    right -= 1
                 else:
-                    right_idx -= 1
+                    result.append([nums[i], nums[left], nums[right]])
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
         return result
 
     def brute_force(self, nums: List[int]) -> List[List[int]]:
