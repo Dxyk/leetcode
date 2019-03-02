@@ -21,6 +21,64 @@ class Solution:
         """
         return self.brute_force(lists)
 
+    def divide_and_conquer(self, lists: List[ListNode]) -> ListNode:
+        """
+        k: num of lists; n: max num of elements in a list
+        T: O(kN); S: O(1)
+        Similar to merge_one_by_one, but using divide and conquer
+
+        :param lists: k sorted linked lists
+        :return: 1 sorted linked list
+        """
+        total = len(lists)
+        interval = 1  # the interval between two merging lists
+        while interval < total:
+            for i in range(0, total - interval, interval * 2):
+                lists[i] = self._merge_two_lists_iterative(lists[i], lists[i + interval])
+            interval *= 2
+        return lists[0] if total > 0 else lists
+
+    def merge_one_by_one(self, lists: List[ListNode]) -> ListNode:
+        """
+        k: num of lists; n: max num of elements in a list
+        T: O(kN); S: O(1)
+        Merge one by one. See 021-merge-two-sorted-lists
+
+        :param lists: k sorted linked lists
+        :return: 1 sorted linked list
+        """
+        if len(lists) > 0:
+            result = lists[0]
+            for i in range(1, len(lists)):
+                result = self._merge_two_lists_iterative(result, lists[i])
+            return result
+
+    def _merge_two_lists_iterative(self, l1: ListNode, l2: ListNode) -> ListNode:
+        """
+        T: O(n)
+
+        :param l1: list node 1
+        :param l2: list node 2
+        :return: the resulting merged list node's head
+        """
+        if None in (l1, l2):
+            return l1 or l2
+        result_head_dummy = ptr = ListNode(-1)
+        result_head_dummy.next = l1
+        while l1 and l2:
+            if l1.val < l2.val:
+                l1 = l1.next
+            else:
+                nxt = ptr.next
+                ptr.next = l2
+                temp = l2.next
+                l2.next = nxt
+                l2 = temp
+            ptr = ptr.next
+        # don't need to continue the loop. can just point the head to the list with remaining elements
+        ptr.next = l1 or l2
+        return result_head_dummy.next
+
     def priority_queue(self, lists: List[ListNode]) -> ListNode:
         """
         k: num of lists; n: max num of elements in a list
@@ -32,6 +90,8 @@ class Solution:
         """
         dummy_head = ptr = ListNode(-1)
         q = PriorityQueue()
+
+        # put all items in the queue (O(k log k))
         for ll in lists:
             if ll:
                 q.put((ll.val, ll))
