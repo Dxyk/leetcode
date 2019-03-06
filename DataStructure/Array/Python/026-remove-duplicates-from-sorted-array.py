@@ -25,7 +25,7 @@ class Solution:
             return 0
         return self.two_pointer(nums)
 
-    def interestion_soln(self, nums: List[int]) -> int:
+    def interesting_soln(self, nums: List[int]) -> int:
         """
         T: O(n)
         An interesting soln
