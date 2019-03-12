@@ -30,13 +30,15 @@ class Solution:
 
     def process_nums_soln(self, dividend: int, divisor: int) -> int:
         """
+        T: O(nlogn)
         process the numbers by dividing every ten digits
+        Note: The algorithm uses binary search to get the maximum result that's a 2-mutiple of divisor,
+        and uses what's left as the new dividend and start over again.
 
         :param dividend: the dividend
         :param divisor: the divisor
         :return: dividend // divisor
         """
-        # TODO: Walk Through
         negative = (dividend > 0) ^ (divisor > 0)
         dividend, divisor = abs(dividend), abs(divisor)
         res = 0
@@ -69,3 +71,6 @@ class Solution:
             return res + 1
         else:
             return res
+
+if __name__ == '__main__':
+    Solution().process_nums_soln(100, 3)
