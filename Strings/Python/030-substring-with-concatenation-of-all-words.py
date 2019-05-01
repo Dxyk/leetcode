@@ -50,7 +50,7 @@ class Solution:
         len_substr = len(words) * len_word
         word_to_times = {}
 
-        # populate word_to_times dict
+        # populate word_to_times dict. This is just a counter for each words
         for word in words:
             word_to_times[word] = 1 if word not in word_to_times else word_to_times[word] + 1
 
