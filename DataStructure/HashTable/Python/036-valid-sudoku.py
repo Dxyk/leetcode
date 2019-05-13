@@ -19,7 +19,7 @@ class Solution:
 
     def brute_force(self, board: List[List[str]]) -> bool:
         """
-        T: O()
+        T: O(n^4)
         The brute force solution
 
         :param board: a 2D matrix that represents a sudoku board
@@ -48,18 +48,18 @@ class Solution:
                     if compare_row_idx != curr_row_idx and compare != "." and curr == compare:
                         return False
 
-        # check 3*3 blocks
-        for row_idx in range(0, len(board), 3):
-            for col_idx in range(0, len(board[0]), 3):
+        # check 3*3 blocks O(n^4)
+        for row_idx in range(0, len(board), 3):  # O(n)
+            for col_idx in range(0, len(board[0]), 3):  # O(n)
                 curr_block = []
                 curr_block.extend(board[row_idx][col_idx: col_idx + 3])
                 curr_block.extend(board[row_idx + 1][col_idx: col_idx + 3])
                 curr_block.extend(board[row_idx + 2][col_idx: col_idx + 3])
-                for curr_idx in range(len(curr_block)):
+                for curr_idx in range(len(curr_block)):  # O(n)
                     curr = curr_block[curr_idx]
                     if curr == ".":
                         continue
-                    for compare_idx in range(len(curr_block)):
+                    for compare_idx in range(len(curr_block)):  # O(n)
                         compare = curr_block[compare_idx]
                         if compare_idx != curr_idx and compare != "." and curr == compare:
                             return False
@@ -105,4 +105,3 @@ if __name__ == '__main__':
          ['.', '2', '.', '9', '.', '.', '.', '.', '.'],
          ['.', '.', '4', '.', '.', '.', '.', '.', '.']]
     print(Solution().isValidSudoku(b))
-
