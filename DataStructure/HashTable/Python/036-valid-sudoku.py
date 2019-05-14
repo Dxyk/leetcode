@@ -15,7 +15,39 @@ class Solution:
         :param board: a 2D matrix that represents a sudoku board
         :return: true if the sudoku is valid, false otherwise
         """
-        return self.brute_force(board)
+        return self.hash_table(board)
+
+    def hash_table(self, board: List[List[str]]) -> bool:
+        """
+        T: O()
+        A HashTable solution
+
+        :param board: a 2D matrix that represents a sudoku board
+        :return: true if the sudoku is valid, false otherwise
+        """
+        # a hash table [number : list of coordinates on the board]
+        # O(n^2)
+        num_to_coord = {str(key): [] for key in range(1, 10)}
+        for row_idx in range(len(board)):
+            for col_idx in range(len(board[0])):
+                num = board[row_idx][col_idx]
+                if num != '.':
+                    num_to_coord[num].append((row_idx, col_idx))
+
+        # find duplicates within each row, each col and each 3*3 block for each number
+        # O(n^2)
+        for num, coords in num_to_coord.items():
+            # rows and cols for a number cannot have duplicates
+            rows = [coord[0] for coord in coords]
+            cols = [coord[1] for coord in coords]
+            if len(rows) != len(set(rows)) or len(cols) != len(set(cols)):
+                return False
+
+            # check duplicates for every 3 * 3 block
+            blocks_tpl = [(coord[0] // 3, coord[1] // 3) for coord in coords]
+            if len(blocks_tpl) != len(set(blocks_tpl)):
+                return False
+        return True
 
     def brute_force(self, board: List[List[str]]) -> bool:
         """
