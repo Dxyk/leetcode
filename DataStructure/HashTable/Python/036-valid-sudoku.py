@@ -19,7 +19,7 @@ class Solution:
 
     def hash_table(self, board: List[List[str]]) -> bool:
         """
-        T: O()
+        T: O(n^2)
         A HashTable solution
 
         :param board: a 2D matrix that represents a sudoku board
