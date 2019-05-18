@@ -52,7 +52,5 @@ class Solution:
         return results
 
 
-
-
 if __name__ == '__main__':
     print(Solution().combinationSum([2, 3, 6, 7], 7))
