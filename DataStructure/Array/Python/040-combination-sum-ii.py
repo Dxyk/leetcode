@@ -46,15 +46,11 @@ class Solution:
             return
 
         for i in range(start, len(candidates)):
-            # Very important here! We don't use `i > 0` because we always want 
-            # to count the first element in this recursive step even if it is the same 
-            # as one before. To avoid overcounting, we just ignore the duplicates
-            # after the first element.
+            # because each recursive call we're incrementing start by 1, we skip i+1 if it's the
+            # same as i, since we'll cover that in the recursive call in i. Preventing over-counting
             if i > start and candidates[i] == candidates[i - 1]:
                 continue
 
-            # If the current element is bigger than the assigned target, there is 
-            # no need to keep searching, since all the numbers are positive
             if candidates[i] > target:
                 break
 
