@@ -30,9 +30,6 @@ class Solution:
         # TODO: Dynamic Programming
 
 
-def main():
-    print(Solution().isMatch("aa", "a"))
-
 
 if __name__ == '__main__':
-    main()
+    print(Solution().isMatch("aa", "a"))
