@@ -53,7 +53,7 @@ class Solution:
             n = -n
         res = 1
         while n:
-            if n & 1:
+            if n % 2:
                 res *= x
             x *= x
             n //= 2
