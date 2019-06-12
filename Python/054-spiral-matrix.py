@@ -19,8 +19,20 @@ class Solution:
             return []
         return self.matrix_rotation_soln(matrix)
 
+    def pythonic_matrix_rotation_soln(self, matrix: List[List[int]]) -> List[int]:
+        """
+        T: O(n^3)
+        Same as matrix_rotation_soln but a more pythonic one-liner way
+        Ofc this is not to be understood
+
+        :param matrix: the matrix
+        :return: spiral traversal of the matrix
+        """
+        return matrix and [*matrix.pop(0)] + self.spiralOrder([*zip(*matrix)][::-1])
+
     def matrix_rotation_soln(self, matrix: List[List[int]]) -> List[int]:
         """
+        T: O(n^3)
         Each iteration we pop the first row and then rotate the matrix in the reverse direction
         of the traversal
 
@@ -35,17 +47,21 @@ class Solution:
             :param orig_matrix: the original matrix
             :return: the rotated matrix
             """
+            if not orig_matrix or not orig_matrix[0]:
+                return [[]]
+
+            if len(matrix) == 1 and len(matrix[0]) == 1:
+                return matrix
+
             new_rows, new_cols = len(orig_matrix[0]), len(orig_matrix)
             rotated_matrix = [[0] * new_cols for _ in range(new_rows)]  # [num cols * num rows]
-            for i in range(new_rows):
+            for i in range(new_rows - 1, -1, -1):
                 for j in range(new_cols):
-                    rotated_matrix[i][j] = orig_matrix[j][new_cols - i]
-                    print((i, j), orig_matrix, rotated_matrix)
+                    rotated_matrix[new_rows - i - 1][j] = orig_matrix[j][i]
             return rotated_matrix
 
         res = []
         while matrix and matrix[0]:
-            print(matrix)
             res.extend(matrix[0])
             matrix.pop(0)
             matrix = rotate_matrix(matrix)
