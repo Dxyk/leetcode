@@ -106,6 +106,7 @@ def _get_inserting_idx(data: List[str], start: int, end: int, target_question_no
 
 def _generate_line(file_path: str, link: str = None, difficulty: str = None,
                    topic: str = None) -> str:
+    # TODO: This file path needs to be relative to LeetCode instead of utils.
     path = Path(file_path)
     split_file_name = path.name.split(".")[0].split("-")
     question_no = str(int(split_file_name[0]))  # str(int()) to remove padded zeros
