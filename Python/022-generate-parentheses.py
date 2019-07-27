@@ -23,7 +23,8 @@ class Solution:
         :param n: the number of pairs of parentheses
         :return: a list of all possible parenthesis
         """
-        if n == 0: return ['']
+        if n == 0:
+            return ['']
         ans = []
         for c in range(n):
             for left in self.generateParenthesis(c):

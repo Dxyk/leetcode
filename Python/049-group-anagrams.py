@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple
+from typing import Dict, List, Tuple
 
 
 class Solution:
@@ -50,7 +50,6 @@ class Solution:
             else:
                 d[tuple(count)] = [word]
         return list(d.values())
-
 
     def hash_map_sorted_letters_soln(self, strs: List[str]) -> List[List[str]]:
         """

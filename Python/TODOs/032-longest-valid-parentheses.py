@@ -15,5 +15,6 @@ class Solution:
         :return: the length of the longest valid parentheses
         """
 
+
 if __name__ == '__main__':
     Solution().longestValidParentheses("(()")

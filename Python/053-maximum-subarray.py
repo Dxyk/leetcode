@@ -75,4 +75,3 @@ class Solution:
                 right += 1
             left += 1
         return max_sum
-

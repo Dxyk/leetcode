@@ -30,6 +30,5 @@ class Solution:
         # TODO: Dynamic Programming
 
 
-
 if __name__ == '__main__':
     print(Solution().isMatch("aa", "a"))

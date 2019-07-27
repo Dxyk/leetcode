@@ -72,5 +72,6 @@ class Solution:
         else:
             return res
 
+
 if __name__ == '__main__':
     Solution().process_nums_soln(100, 3)

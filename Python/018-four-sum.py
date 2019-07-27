@@ -44,7 +44,8 @@ class Solution:
         self.find_n_sum(nums, target, 4, 0, len(nums) - 1, [], results)
         return results
 
-    def find_n_sum(self, nums: List[int], target: int, N: int, left, right, result: List[int], results: List[List[int]]) -> None:
+    def find_n_sum(self, nums: List[int], target: int, N: int, left, right, result: List[int],
+                   results: List[List[int]]) -> None:
         """
         T: O()
         find the solution to n sum question (inductive)
@@ -133,14 +134,16 @@ class Solution:
             # if the smallest value * 4 is already greater than target, there ain't no way we can get a soln
             if nums[i] * 4 > target:
                 break
-            if i > 0 and nums[i] == nums[i - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
+            if i > 0 and nums[i] == nums[
+                i - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
                 continue
 
             target2 = target - nums[i]
             for j in range(i + 1, len(nums) - 2):
                 if nums[j] * 3 > target2:
                     break
-                if j > i + 1 and nums[j] == nums[j - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
+                if j > i + 1 and nums[j] == nums[
+                    j - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
                     continue
                 left, right = j + 1, len(nums) - 1
                 target3 = target2 - nums[j]
@@ -177,10 +180,12 @@ class Solution:
         results = []
         nums.sort()
         for i in range(len(nums) - 3):
-            if i > 0 and nums[i] == nums[i - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
+            if i > 0 and nums[i] == nums[
+                i - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
                 continue
             for j in range(i + 1, len(nums) - 2):
-                if j > i + 1 and nums[j] == nums[j - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
+                if j > i + 1 and nums[j] == nums[
+                    j - 1]:  # already exhausted all possible solutions for this number, skip and avoid dup
                     continue
                 left, right = j + 1, len(nums) - 1
                 while left < right:

@@ -19,5 +19,6 @@ class Solution:
         :return: the solution
         """
 
+
 if __name__ == '__main__':
     Solution().solveNQueens(4)
