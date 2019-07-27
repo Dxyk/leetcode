@@ -26,7 +26,11 @@ class Solution:
 
     def two_pointer(self, head: ListNode, k: int) -> ListNode:
         """
-        The brute force solution
+        The two pointer solution
+        1. loop through the ll to get the count
+        2. k %= count
+        3. head -> ... -> left -> ...k nodes... -> right -> None
+        4. return left.next -> ... -> right -> head -> ... -> left -> None
 
         :param head: the head node
         :param k: the number of places to rotate left by
