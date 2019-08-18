@@ -51,13 +51,13 @@ class Question:
 
     def __init__(self, number: int, path: Path, language: str = "Python", link: str = "", difficulty: str = "",
                  topic: List[str] = ""):
-        # TODO: investigate how to fix the path problem
         self._number = number
         question_name = "-".join(path.name.split(".")[0].split("-")[1:])
         name = " ".join([w.capitalize() for w in question_name.split("-")])
         self._name = name
         self._path = Path("Python", path.name)
         self._language = language if language else "Python"
+        # TODO: link generation
         self._link = link if link else ""
         self._difficulty = difficulty if difficulty else ""
         self._topic = topic if topic else []
@@ -72,7 +72,6 @@ class Question:
         table_entry = "| {0} | [{1}]({2}) | [{3}]({4}) | {5} | {6} |\n".format(self._number, self._name, self._link,
                                                                                "Python", self._path, self._difficulty,
                                                                                ", ".join(self._topic))
-        print("Generated entry: ", table_entry)
         return table_entry
 
     def get_num(self) -> int:
@@ -152,51 +151,16 @@ class ReadMeFile:
 
 
 def _get_current_question_number(file: Path) -> int:
+    """
+    Gets the current question number given the path of the file
+
+    :param file: the file path
+    :return: the question number
+    """
     # The file name format: (question_num)-(question name).py
     split_file_name = file.name.split(".")[0].split("-")
     question_no = int(split_file_name[0])
-    print("Current file number: ", question_no)
     return question_no
-
-
-def _get_inserting_idx(data: List[str], start: int, end: int, target_question_no: int) -> int:
-    # Get all the question numbers
-    target_idx = None
-    compiled_pat = re.compile(TABLE_LINE_PATTERN)
-    table_content = data[start: end]
-
-    if table_content and re.search(compiled_pat, table_content[0].strip()):
-        question_nums = [int(re.search(compiled_pat, line.strip()).group(1)) for line in
-                         table_content]
-        # find the index to insert into
-        for idx in range(len(question_nums)):
-            if question_nums[idx] >= target_question_no:
-                target_idx = idx
-                if question_nums[idx] == target_question_no:
-                    data.pop(idx)
-                break
-    target_idx = target_idx if target_idx is not None else len(table_content)
-    print("target index: ", target_idx)
-    return target_idx
-
-
-def _generate_line(file_path: str, link: str = None, difficulty: str = None,
-                   topic: str = None) -> str:
-    # TODO: This file path needs to be relative to LeetCode instead of utils.
-    path = Path(file_path)
-    split_file_name = path.name.split(".")[0].split("-")
-    question_no = str(int(split_file_name[0]))  # str(int()) to remove padded zeros
-    question_name = " ".join([word.capitalize() for word in split_file_name[1:]])
-    question_name = "[{}]".format(question_name) if link else question_name
-    link = "({})".format(link) if link else ""
-    difficulty = difficulty if difficulty else ""
-    language = "[Python]"
-    topic = topic if topic else ""
-    readme_line = "| {0} | {1}{2} | {3}({4}) | {5} | {6} |\n".format(question_no, question_name,
-                                                                     link, language, file_path,
-                                                                     difficulty, topic)
-    print("Generated line: ", readme_line)
-    return readme_line
 
 
 def generate_directory(dir_path: str, readme_file: ReadMeFile) -> bool:
@@ -211,6 +175,7 @@ def generate_directory(dir_path: str, readme_file: ReadMeFile) -> bool:
     for file in directory.iterdir():
         # Note: iterdir does not go in order
         if file.is_file():
+            print("===== Processing file [{}]".format(file.name))
             question_num = _get_current_question_number(file)
             question = Question(question_num, file.absolute(), "Python", "", "", [])
             readme_file.insert_question(question)
@@ -222,43 +187,9 @@ def generate_directory(dir_path: str, readme_file: ReadMeFile) -> bool:
     return True
 
 
-def insert_question_to_table(file_path: str, link: str = None, difficulty: str = None,
-                             topic: str = None) -> None:
-    """
-    Insert a question to the readme table of content.
-    The table of content should be sorted according to question number in ascending order.
-
-    :param file_path: The file path
-    :param link: The LeetCode link to the question
-    :param difficulty: The difficulty of the question
-    :param topic: The topics for the question
-    """
-    if not Path(file_path).exists() and not Path(file_path).is_file():
-        print("ERROR: The file {0} does not exist!".format(file_path))
-        return
-
-    # Read the readme file and extract the table of contents
-    readme_file = open(README_PATH, "r+")
-    data = readme_file.readlines()
-    table_start = data.index("##### Python\n") + 4  # empty line, header, lines
-    table_end = data.index("\n", table_start) if "\n" in data[table_start:] else len(data)
-
-    question_no = _get_current_question_number(Path(file_path))
-
-    # Get all the question numbers
-    target_idx = _get_inserting_idx(data, table_start, table_end, question_no)
-    data.insert(table_start + target_idx, _generate_line(file_path, link, difficulty, topic))
-    print(data)
-
-    # TODO: clear file
-    readme_file.write("\n\n")
-    readme_file.writelines(data)
-
-    readme_file.close()
-
-
 def main() -> None:
     """ The main function """
+    print("========= Application Start =========")
     if not _check_prerequisites():
         print("ERROR: Prerequisites are not met.")
         return
@@ -275,6 +206,8 @@ def main() -> None:
 
     with open(README_PATH, "w") as readme_open:
         readme_open.writelines(readme_file.get_lines())
+
+    print("========= Application End =========")
 
 
 if __name__ == '__main__':
