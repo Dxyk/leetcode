@@ -269,12 +269,12 @@ def main() -> None:
     if not generate_directory("../Python", readme_file):
         print("ERROR: Was not able to successfully generate directory")
 
-    with open(README_PATH, "w") as readme_open:
-        readme_open.writelines(readme_file.get_lines())
-
     # insert_directory_to_table("../Python")
     # insert_directory_to_table("../TODOs")
     # insert_question_to_table("../001-two-sum.py")
+
+    with open(README_PATH, "w") as readme_open:
+        readme_open.writelines(readme_file.get_lines())
 
 
 if __name__ == '__main__':
