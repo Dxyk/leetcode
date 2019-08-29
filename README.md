@@ -72,3 +72,9 @@
 | 53 | [Maximum Subarray]() | [Python](Python/053-maximum-subarray.py) |  |  |
 | 54 | [Spiral Matrix]() | [Python](Python/054-spiral-matrix.py) |  |  |
 | 55 | [Jump Game]() | [Python](Python/055-jump-game.py) |  |  |
+| 56 | [Merge Intervals]() | [Python](Python/056-merge-intervals.py) |  |  |
+| 57 | [Insert Interval]() | [Python](Python/057-insert-interval.py) |  |  |
+| 58 | [Length Of Last Word]() | [Python](Python/058-length-of-last-word.py) |  |  |
+| 59 | [Spiral Matrix Ii]() | [Python](Python/059-spiral-matrix-ii.py) |  |  |
+| 60 | [Permutation Sequence]() | [Python](Python/060-permutation-sequence.py) |  |  |
+| 61 | [Rotate List]() | [Python](Python/061-rotate-list.py) |  |  |

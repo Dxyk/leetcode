@@ -180,7 +180,7 @@ def generate_directory(dir_path: str, readme_file: ReadMeFile) -> bool:
             question = Question(question_num, file.absolute(), "Python", "", "", [])
             readme_file.insert_question(question)
         elif file.is_dir():
-            if not generate_directory(str(file), readme_file):
+            if file.name != "commons" and not generate_directory(str(file), readme_file):
                 print("ERROR: Unable to generate directory: [{}]".format(file.name))
         else:
             print("WARNING: Unknown file path:" + str(file))
