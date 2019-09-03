@@ -79,3 +79,4 @@
 | 60 | [Permutation Sequence]() | [Python](Python/060-permutation-sequence.py) |  |  |
 | 61 | [Rotate List]() | [Python](Python/061-rotate-list.py) |  |  |
 | 62 | [Unique Paths]() | [Python](Python/062-unique-paths.py) |  |  |
+| 63 | [Unique Paths Ii]() | [Python](Python/063-unique-paths-ii.py) |  |  |
