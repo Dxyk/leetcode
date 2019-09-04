@@ -80,3 +80,4 @@
 | 61 | [Rotate List]() | [Python](Python/061-rotate-list.py) |  |  |
 | 62 | [Unique Paths]() | [Python](Python/062-unique-paths.py) |  |  |
 | 63 | [Unique Paths Ii]() | [Python](Python/063-unique-paths-ii.py) |  |  |
+| 64 | [Minimum Path Sum]() | [Python](Python/064-minimum-path-sum.py) |  |  |
