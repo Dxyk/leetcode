@@ -103,7 +103,9 @@ class Solution:
                 first_match = i < len(s) and p[j] in {s[i], '.'}
 
                 if j + 1 < len(p) and p[j + 1] == '*':
-                    memo[i][j] = memo[i][j + 2] or first_match and memo[i + 1][j]
+                    exhausted_match = memo[i][j + 2]
+                    unexhausted_match = first_match and memo[i + 1][j]
+                    memo[i][j] = exhausted_match or unexhausted_match
                 else:
                     memo[i][j] = first_match and memo[i + 1][j + 1]
 
