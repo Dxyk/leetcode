@@ -21,7 +21,7 @@
 #
 # Input: "babad"
 # Output: "bab"
-# Note: "aba" is also a valid answer.
+# Note: "aba" is also a valid reswer.
 #
 #
 # Example 2:
@@ -35,12 +35,70 @@
 
 # @lc code=start
 
-from typing import List
-
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        return self.brute_force(s)
+        return self.dp_bottom_up(s)
+
+    def middle_out(self, s: str) -> str:
+        pass
+
+    def dp_bottom_up(self, s: str) -> str:
+        """
+        DP Bottom Up solution
+
+        Runtime: O(n^2)
+        """
+        res = ""
+        max_len = 0
+        memo = [[0] * len(s) for _ in range(len(s))]  # n * n matrix
+        for i in range(len(s)):
+            memo[i][i] = True
+            max_len = 1
+            res = s[i]
+        for i in range(len(s) - 1):
+            if s[i] == s[i + 1]:
+                memo[i][i + 1] = True
+                res = s[i: i + 2]
+                max_len = 2
+        for j in range(len(s)):
+            for i in range(0, j - 1):
+                if s[i] == s[j] and memo[i + 1][j - 1]:
+                    memo[i][j] = True
+                    if max_len < j - i + 1:
+                        res = s[i: j + 1]
+                        max_len = j - i + 1
+        return res
+
+    def dp_recursive(self, s: str) -> str:
+        """
+        The memo Solution
+
+        Subproblem:
+        - The first character of the substring can be either
+            - palindrome left
+            - palindrome right
+            - not in the palindrome
+        """
+        # TODO: This doesn't work...
+        if len(s) < 2:
+            return s
+
+        def helper(i: int, j: int) -> bool:
+            if i == j:
+                return True, s[i]
+            elif j == i + 1:
+                if s[i] == s[j]:
+                    return True, s[i: j + 1]
+                else:
+                    return False, s[i]
+            else:
+                is_sub_palindrome, sub_palindrome = helper(i + 1, j - 1)
+                if is_sub_palindrome != "" and s[i] == s[j]:
+                    return True, s[i] + sub_palindrome + s[j]
+                else:
+                    return False, sub_palindrome
+        return helper(0, len(s) - 1)[1]
 
     def longest_common_substring(self, s: str) -> str:
         """
@@ -63,8 +121,8 @@ class Solution:
                 else:
                     memo[i][j] = 1
 
-                # check to see if the current indices match against each other to
-                # form a palindrome
+                # check to see if the current indices match against each other
+                # to form a palindrome
                 if memo[i][j] > max_common_len:
                     si = i - memo[i][j] + 1
                     sj = j - memo[i][j] + 1
@@ -72,32 +130,6 @@ class Solution:
                         max_common_len = memo[i][j]
                         res = s[si: i + 1]
         return res
-
-    def dp_soln(self, s: str) -> str:
-        """
-        The DP Solution
-
-        Subproblem:
-        - The first character of the substring can be either 
-            - palindrome left
-            - palindrome right
-            - not in the palindrome
-        """
-        return self.dp_soln_helper(s, [], "")
-
-    def dp_soln_helper(self, substring: str, palindrome_stack: List[str],
-                       curr_tracking: str) -> str:
-        if not substring:
-            return []
-        else:
-            if len(palindrome_stack) >= 1 and substring[0] == palindrome_stack[-1]:
-                res1 = self.dp_soln_helper(
-                    substring[1:], palindrome_stack[:-1], curr_tracking + substring[0])
-            if len(palindrome_stack) >= 1 and substring[0] == palindrome_stack[-2]:
-                res2 = self.dp_soln_helper(
-                    substring[1:], palindrome_stack[: -2], curr_tracking + substring[0])
-            res3 = self.dp_soln_helper(
-                substring[1:], palindrome_stack[:], curr_tracking)
 
     def brute_force(self, s: str) -> str:
         """
@@ -126,6 +158,7 @@ class Solution:
 
 
 if __name__ == "__main__":
+    print(Solution().longestPalindrome("abb"))
     # print(Solution().longestPalindrome("babad"))
     # print(Solution().longestPalindrome("cbbd"))
-    print(Solution().longestPalindrome("bb"))
+    # print(Solution().longestPalindrome("bb"))
