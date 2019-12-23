@@ -48,6 +48,54 @@
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        pass
+        return self.dp_bottom_up(n)
+
+    def dp_bottom_up(self, n: int) -> int:
+        """
+        dp bottom up solution
+
+        Runtime: O(n)
+        """
+        if n < 3:
+            return n
+        memo = [0 for _ in range(n)]
+        memo[0] = 1
+        memo[1] = 2
+        for i in range(2, len(memo)):
+            memo[i] = memo[i - 1] + memo[i - 2]
+        return memo[-1]
+
+    def dp_memoize(self, n: int) -> int:
+        """
+        DP memoize solution
+        """
+        memo = [0 for _ in range(n + 1)]
+
+        def helper(start: int) -> int:
+            if memo[start] != 0:
+                return memo[start]
+            res = 0
+            if start == 1:
+                res = 1
+            elif start == 2:
+                res = 2
+            else:
+                res = helper(start - 1) + helper(start - 2)
+            memo[start] = res
+            return res
+        return helper(n)
+
+    def dp_recursive(self, n: int) -> int:
+        """
+        DP recursive solution
+        """
+        def helper(start: int) -> int:
+            if start == 1:
+                return 1
+            elif start == 2:
+                return 2
+            else:
+                return helper(start - 1) + helper(start - 2)
+        return helper(n)
 
 # @lc code=end
