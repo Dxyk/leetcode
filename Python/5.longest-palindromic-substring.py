@@ -37,6 +37,8 @@
 
 
 class Solution:
+    # TODO: Manacher's algorithm
+    # http://articles.leetcode.com/longest-palindromic-substring-part-ii/
     def longestPalindrome(self, s: str) -> str:
         return self.middle_out(s)
 
@@ -181,6 +183,6 @@ class Solution:
 
 if __name__ == "__main__":
     print(Solution().longestPalindrome("bb"))
-    # print(Solution().longestPalindrome("babad"))
-    # print(Solution().longestPalindrome("cbbd"))
-    # print(Solution().longestPalindrome("bb"))
+    print(Solution().longestPalindrome("babad"))
+    print(Solution().longestPalindrome("cbbd"))
+    print(Solution().longestPalindrome("bb"))
