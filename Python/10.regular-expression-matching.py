@@ -89,6 +89,89 @@
 
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-        pass
+        return self.dp_bottom_up(s, p)
+
+    def dp_bottom_up(self, s: str, p: str):
+        """
+        dp bottom-up solution
+        """
+        memo = [[False] * (len(p) + 1) for _ in range(len(s) + 1)]
+        memo[-1][-1] = True
+
+        for i in range(len(s), -1, -1):
+            for j in range(len(p) - 1, -1, -1):
+                first_match = i < len(s) and p[j] in {s[i], '.'}
+
+                if j + 1 < len(p) and p[j + 1] == '*':
+                    memo[i][j] = memo[i][j + 2] or first_match and memo[i + 1][j]
+                else:
+                    memo[i][j] = first_match and memo[i + 1][j + 1]
+
+        return memo[0][0]
+
+    def dp_memoize(self, s: str, p: str) -> bool:
+        """
+        dp top-down solution
+
+        Subproblem structure:
+        Let P(i, j) := True if s[i:] matches with p[j:]
+
+        Then P(i, j) =
+        1. s[i:]=""                                 if p[j:]==""
+        2. s[i].match and P(i+1, j+1)               if p[1]!="*"
+        3. P(i,j+2) or [P(i+1, j) and s[i].match]   if p[1]=="*"
+        """
+        memo = [[None] * (len(p) + 1) for _ in range(len(s) + 1)]
+
+        def helper(i: int, j: int) -> bool:
+            if memo[i][j] is None:
+                if j == len(p):
+                    res = i == len(s)
+                else:
+                    first_match = i < len(s) and p[j] in (s[i], ".")
+
+                    if j + 1 < len(p) and p[j + 1] == "*":
+                        # Two cases:
+                        # 1. ".*" has been exhausted
+                        # 2. ".*" has not been exhausted
+                        exhausted_match = helper(i, j + 2)
+                        unexhausted_match = first_match and helper(i + 1, j)
+                        res = exhausted_match or unexhausted_match
+                    else:
+                        res = first_match and helper(i + 1, j + 1)
+
+                memo[i][j] = res
+            return memo[i][j]
+
+        return helper(0, 0)
+
+    def recursive_soln(self, s: str, p: str) -> bool:
+        """
+        recursive solution
+        """
+        if p == "":
+            return s == ""
+
+        first_match = s != "" and p[0] in (s[0], ".")
+
+        if len(p) >= 2 and p[1] == "*":
+            # Two cases:
+            # 1. ".*" has been exhausted
+            # 2. ".*" has not been exhausted
+            exhausted_match = self.recursive_soln(s, p[2:])
+            unexhausted_match = first_match and self.recursive_soln(s[1:], p)
+            return exhausted_match or unexhausted_match
+        else:
+            return first_match and self.recursive_soln(s[1:], p[1:])
+
 
 # @lc code=end
+
+
+if __name__ == "__main__":
+    print(Solution().isMatch("aa", "a"), False)
+    print(Solution().isMatch("aa", "a*"), True)
+    print(Solution().isMatch("ab", ".*"), True)
+    print(Solution().isMatch("ab", ".*c"), False)
+    print(Solution().isMatch("aab", "c*a*b*"), True)
+    print(Solution().isMatch("mississippi", "mis*is*p*."), False)
