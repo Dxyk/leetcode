@@ -124,8 +124,8 @@ class Solution:
 
     # @lc code=end
 
+
 if __name__ == "__main__":
     # print(Solution().longestPalindrome("babad"))
     # print(Solution().longestPalindrome("cbbd"))
     print(Solution().longestPalindrome("bb"))
-
