@@ -38,10 +38,32 @@
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        return self.dp_bottom_up(s)
+        return self.middle_out(s)
 
     def middle_out(self, s: str) -> str:
-        pass
+        """
+        Expand around center to form the palindrome.
+
+        There are (2n - 1) instead of n centers because there exists
+        palindromes such as "abba"
+
+        Runtime: O(n^2)
+        """
+        def expand(left: int, right: int) -> int:
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return right - left - 1
+
+        if len(s) < 2:
+            return s
+        start = end = 0
+        for i in range(len(s)):
+            max_len = max(expand(i, i), expand(i, i + 1))
+            if max_len > end - start:
+                start = i - (max_len - 1) // 2
+                end = i + max_len // 2
+        return s[start: end + 1]
 
     def dp_bottom_up(self, s: str) -> str:
         """
@@ -158,7 +180,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    print(Solution().longestPalindrome("abb"))
+    print(Solution().longestPalindrome("bb"))
     # print(Solution().longestPalindrome("babad"))
     # print(Solution().longestPalindrome("cbbd"))
     # print(Solution().longestPalindrome("bb"))
