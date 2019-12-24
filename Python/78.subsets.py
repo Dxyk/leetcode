@@ -42,9 +42,26 @@ from typing import List
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        pass
+        return self.backtrack_soln(nums)
+
+    def backtrack_soln(self, nums: List[int]) -> List[List[int]]:
+        """
+        Backtracking solution
+        """
+        res = []
+
+        def backtrack_helper(curr_subset: List[int], start: int) -> None:
+            res.append(curr_subset[:])
+            for i in range(start, len(nums)):
+                curr_subset.append(nums[i])
+                backtrack_helper(curr_subset, i + 1)
+                curr_subset.pop()
+            return
+
+        backtrack_helper([], 0)
+        return res
 # @lc code=end
 
 
 if __name__ == "__main__":
-    pass
+    print(Solution().backtrack_soln([1, 2, 3]))
