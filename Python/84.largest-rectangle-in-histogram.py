@@ -70,8 +70,8 @@ class Solution:
         """
         DP solution
 
-        Save the indices of the heights that is no lower than the current height
-        in the lists max_left and max_right
+        Save the indices of the heights that is no lower than the current 
+        height in the lists max_left and max_right
 
         Runtime: O(n^2) for building the max left and max right lists
         """
