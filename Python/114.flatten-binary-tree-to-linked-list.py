@@ -59,7 +59,7 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        return self.iterative_soln(root)
+        return self.recursive_soln(root)
 
     def iterative_soln(self, root: TreeNode) -> None:
         """
@@ -92,24 +92,30 @@ class Solution:
             most node for each call
         Space: O(n) since flatten every node
         """
-        if root is not None:
-            left = right = None
-            if root.left is not None:
-                self.recursive_soln(root.left)
-                left = root.left
-            if root.right is not None:
-                self.recursive_soln(root.right)
-                right = root.right
-            if left is not None:
-                root.right = root.left
-                root.left = None
-                curr = root.right
-                # this could be optimized so that we don't have to search for
-                # the right most node every time
-                while curr.right:
-                    curr = curr.right
-                curr.right = right
-        return
+        def helper(node: TreeNode, last: TreeNode) -> TreeNode:
+            if node is None:
+                return last
+            node.right = helper(node.left, helper(node.right, last))
+            node.left = None
+            return node
+        # if root is not None:
+        #     left = right = None
+        #     if root.left is not None:
+        #         self.recursive_soln(root.left)
+        #         left = root.left
+        #     if root.right is not None:
+        #         self.recursive_soln(root.right)
+        #         right = root.right
+        #     if left is not None:
+        #         root.right = root.left
+        #         root.left = None
+        #         curr = root.right
+        #         # this could be optimized so that we don't have to search for
+        #         # the right most node every time
+        #         while curr.right:
+        #             curr = curr.right
+        #         curr.right = right
+        return helper(root, None)
 # @lc code=end
 
 
