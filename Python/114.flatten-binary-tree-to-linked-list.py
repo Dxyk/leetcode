@@ -59,13 +59,38 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        return self.recursive_soln(root)
+        return self.iterative_soln(root)
+
+    def iterative_soln(self, root: TreeNode) -> None:
+        """
+        Iterative solution
+
+        Runtime: O(n) since preorder traversal
+        Space: O(n) since stack size n
+        """
+        if root is not None:
+            stack = []
+            stack.append(root)
+            while len(stack) != 0:
+                curr = stack.pop()
+                if curr.right is not None:
+                    stack.append(curr.right)
+                if curr.left is not None:
+                    stack.append(curr.left)
+                if len(stack) != 0:
+                    curr.right = stack[-1]
+                curr.left = None
+        return
 
     def recursive_soln(self, root: TreeNode) -> None:
         """
         Recursive solution
 
         Recursively move the left subtree to the right
+
+        Runtime: O(n^2) since flattening the whole list and search for right
+            most node for each call
+        Space: O(n) since flatten every node
         """
         if root is not None:
             left = right = None
@@ -79,8 +104,8 @@ class Solution:
                 root.right = root.left
                 root.left = None
                 curr = root.right
-                # this could be optimized so that we don't have to search for the
-                # right most node every time
+                # this could be optimized so that we don't have to search for
+                # the right most node every time
                 while curr.right:
                     curr = curr.right
                 curr.right = right
