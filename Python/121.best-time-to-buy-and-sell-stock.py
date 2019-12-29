@@ -48,7 +48,7 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        return self.sliding_window_soln(prices)
+        return self.one_pass_soln(prices)
 
     def kadane_algo_soln(self, prices: List[int]) -> int:
         """
@@ -71,7 +71,7 @@ class Solution:
             max_profit = max(max_curr_diff, max_profit)
         return max_profit
 
-    def sliding_window_soln(self, prices: List[int]) -> int:
+    def one_pass_soln(self, prices: List[int]) -> int:
         """
         The maximum profit = max - min such that min index < max index
         """
