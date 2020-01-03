@@ -70,4 +70,5 @@ def get_list(node: ListNode) -> List[int]:
     res = []
     while curr is not None:
         res.append(curr.val)
+        curr = curr.next
     return res
