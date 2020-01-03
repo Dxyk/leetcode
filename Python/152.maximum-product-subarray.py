@@ -39,9 +39,56 @@ from typing import List
 
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        return self.dp_memoized_soln(nums)
+        return self.dp_bottom_up_soln(nums)
 
-    def dp_memoized_soln(self, nums: List[int]) -> int:
+    def dp_bottom_up_soln(self, nums: List[int]) -> int:
+        """
+        DP bottom up solution
+
+        Runtime: O(n)
+        Space: O(1)
+        """
+        res = nums[0]
+        curr_max = res
+        curr_min = res
+        for i in range(1, len(nums)):
+            curr = nums[i]
+            if curr < 0:
+                curr_max, curr_min = curr_min, curr_max
+            curr_max = max(curr, curr_max * curr)
+            curr_min = min(curr, curr_min * curr)
+            res = max(curr_max, res)
+        return res
+
+    def dp_memoized_1d_soln(self, nums: List[int]) -> int:
+        """
+        DP memoized solution
+
+        Space: MLE
+        """
+        # 1d memo that stores [curr_max, curr_min]
+        memo = [None] * len(nums)
+
+        def helper(i: int) -> int:
+            if i < 0 or i > len(nums):
+                return [-float("inf"), float("inf")]
+            if memo[i] is None:
+                if i == 0:
+                    res = [nums[i]] * 2
+                else:
+                    curr_max, curr_min = helper(i - 1)
+                    if nums[i] < 0:
+                        curr_max, curr_min = curr_min, curr_max
+                    curr_max = max(nums[i], curr_max * nums[i])
+                    curr_min = min(nums[i], curr_min * nums[i])
+                    res = [curr_max, curr_min]
+                memo[i] = res
+            return memo[i]
+
+        helper(len(nums) - 1)
+        return max([curr[0] for curr in memo])
+
+    def dp_memoized_2d_soln(self, nums: List[int]) -> int:
         """
         DP memoized solution
 
@@ -90,7 +137,10 @@ class Solution:
 
 
 if __name__ == "__main__":
+    print(Solution().maxProduct([-2, -3, 1, -4]), 12)
     print(Solution().maxProduct([-2, 3, 1, -4]), 24)
     print(Solution().maxProduct([2, 3, -1, 4]), 6)
     print(Solution().maxProduct([-2, 0, -1]), 0)
     print(Solution().maxProduct([-2]), -2)
+    print(Solution().maxProduct([0, -2]), 0)
+    print(Solution().maxProduct([0, 2]), 2)
