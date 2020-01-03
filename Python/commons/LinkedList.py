@@ -63,3 +63,11 @@ def create_list(lst: List[int]) -> ListNode:
         curr.next = ListNode(val)
         curr = curr.next
     return dummy.next
+
+
+def get_list(node: ListNode) -> List[int]:
+    curr = node
+    res = []
+    while curr is not None:
+        res.append(curr.val)
+    return res
