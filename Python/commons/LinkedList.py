@@ -54,3 +54,12 @@ class LinkedList:
         :return: the starting ListNode
         """
         return self.head
+
+
+def create_list(lst: List[int]) -> ListNode:
+    dummy = ListNode(-1)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
