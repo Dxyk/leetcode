@@ -12,6 +12,14 @@
 +-- README.md
 ```
 
+## Python Solutions
+
+### Dependencies
+
+- Python version: 3.9.4
+- Snippets
+  - [LeetCode snippets](.vscode/LeetCode.code-snippets): use `main` or `test` for local testing snippet
+
 ## VSCode LeetCode Extension
 
 Practiced using VSCode's [LeetCode extension](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-leetcode)
