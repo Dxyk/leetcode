@@ -16,7 +16,8 @@
 
 ### Dependencies
 
-- Python version: 3.9.4
+- Python version: 3.7.*
+  - Note: Python ^3.8.0 will break VSCode python intellisense and autocomplete, hence Python 3.7 (see [reference thread](https://github.com/microsoft/vscode-python/issues/9321#issuecomment-570038262))
 - Snippets
   - [LeetCode snippets](.vscode/LeetCode.code-snippets): use `main` or `test` for local testing snippet
 

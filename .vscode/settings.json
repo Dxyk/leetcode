@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/xiangyukong/opt/anaconda3/envs/Python3.9/bin/python",
+    "python.pythonPath": "/Users/xiangyukong/opt/anaconda3/envs/Python3.7/bin/python",
     "autoDocstring.customTemplatePath": "./.vscode/sphinx.mustache",
     "cSpell.words": [
         "Inorder's",
