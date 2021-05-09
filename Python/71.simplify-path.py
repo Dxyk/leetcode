@@ -81,6 +81,7 @@
 #
 #
 
+
 # @lc code=start
 class Solution:
     def simplifyPath(self, path: str) -> str:
@@ -112,6 +113,7 @@ class Solution:
                 res_list.append(item)
         res_path = "/" + "/".join(res_list)
         return res_path
+
 
 # @lc code=end
 
