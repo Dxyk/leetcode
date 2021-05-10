@@ -15,12 +15,25 @@
     // 	],
     // 	"description": "Log output to console"
     // }
-    "LocalTest": {
+    "MainMethod": {
         "scope": "python",
-        "prefix": ["main", "test"],
+        "prefix": ["main"],
         "body": [
             "if __name__ == \"__main__\":",
-            "\tprint(Solution().$1($0))"
+            "\t$0",
+        ]
+    },
+    "TestCase": {
+        "scope": "python",
+        "prefix": "test",
+        "body": [
+            "# Test Case ${1:#testCase}",
+            "target = ${3:targetInput}",
+            "expected = ${4:expectedOutput}",
+            "actual = Solution().${2:method_name}(target)",
+            "print(\"Test case ${1:#testCase}\")",
+            "print(actual)",
+            "print(expected)"
         ]
     }
 }
