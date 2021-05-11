@@ -1,33 +1,28 @@
 # LeetCode
 
-## Project Structure
+## Dependencies
 
-```text
-.
-+-- Python
-|   +-- TODOs
-|   +-- utils
-+-- .gitignore
-+-- LICENSE
-+-- README.md
-```
+### Python
 
-## Python Solutions
+- Python version: 3.7.\*
 
-### Dependencies
+  - Note: Python ^3.8.0 will break VSCode python intellisense and autocomplete, hence Python 3.7.\* (see [reference thread](https://github.com/microsoft/vscode-python/issues/9321#issuecomment-570038262))
 
-- Python version: 3.7.*
-  - Note: Python ^3.8.0 will break VSCode python intellisense and autocomplete, hence Python 3.7 (see [reference thread](https://github.com/microsoft/vscode-python/issues/9321#issuecomment-570038262))
-- Snippets
-  - [LeetCode snippets](.vscode/LeetCode.code-snippets): use `main` or `test` for local testing snippet
+### VSCode
 
-## VSCode LeetCode Extension
+- [VSCode LeetCode Extension](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-leetcode)
 
-Practiced using VSCode's [LeetCode extension](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-leetcode)
+  - Allows opening LeetCode questions within VSCode
+  - Generates files base on LeetCode Questions
+  - See [VSCode LeetCode Extension Settings](#vscode-leetcode-extension-settings) for setup steps
 
-### Sign In using Cookie
+- [Custom LeetCode snippets](.vscode/LeetCode.code-snippets)
 
-To sign in using Cookies, use the following steps (see reference [here](https://github.com/LeetCode-OpenSource/vscode-leetcode/issues/478#issuecomment-564757098))
+  - Since VSCode Python extension removed snippets, added `main` and `test` for local testing
+
+#### VSCode LeetCode Extension Settings
+
+VSCode LeetCode extension requires user sign-in before it can be used. To do so, follow the steps bellow (see reference [here](https://github.com/LeetCode-OpenSource/vscode-leetcode/issues/478#issuecomment-564757098)).
 
 1. Install NodeJs version 8+ if necessary
 2. Install latest LeetCode-CLI using npm
@@ -43,7 +38,7 @@ To sign in using Cookies, use the following steps (see reference [here](https://
 
    1. Open developer console
    2. Trigger any XHR request
-   3. Copy entire `cookie` in request header
+   3. Copy entire `cookie` in Request Header
 
 4. Input the cookie either
    1. In VSCode LeetCode plugin
