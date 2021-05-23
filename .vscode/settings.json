@@ -1,5 +1,8 @@
 {
     "python.pythonPath": "/Users/xiangyukong/opt/anaconda3/envs/Python3.7/bin/python",
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}${pathSeparator}/Python"
+    },
     "autoDocstring.customTemplatePath": "./.vscode/sphinx.mustache",
     "cSpell.words": [
         "Inorder's",
