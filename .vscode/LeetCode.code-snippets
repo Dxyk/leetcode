@@ -28,9 +28,9 @@
         "prefix": "test",
         "body": [
             "# Test Case ${1:#testCase}",
-            "target = ${3:targetInput}",
+            "input1 = ${3:input1}",
             "expected = ${4:expectedOutput}",
-            "actual = Solution().${2:method_name}(target)",
+            "actual = Solution().${2:method_name}(input1)",
             "print(\"Test case ${1:#testCase}\")",
             "print(actual)",
             "print(expected)"
