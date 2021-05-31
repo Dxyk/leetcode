@@ -69,10 +69,13 @@ class TreeNode:
                     curr_level.append(None)
                 count -= 1
             curr_level.extend([None] * (2**height - len(curr_level)))
-            traversed.append(str(curr_level))
-            height += 1
 
-        return "[\n" + "\t\n".join(traversed) + "\n]"
+            # avoid last level of pure nulls
+            if queue and any([item for item in curr_level]):
+                traversed.append(str(curr_level))
+                height += 1
+
+        return "\n".join(traversed) + "\n" + "=" * 10
 
 
 class BinaryTree:
