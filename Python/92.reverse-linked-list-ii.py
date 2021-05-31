@@ -109,20 +109,20 @@ class Solution:
 
 if __name__ == "__main__":
     # Test Case 1
-    input1 = LinkedList([1, 2, 3, 4, 5]).get_start()
+    input1 = LinkedList([1, 2, 3, 4, 5]).get_head()
     input2 = 2
     input3 = 4
-    expected = LinkedList([1, 4, 3, 2, 5]).get_start()
+    expected = LinkedList([1, 4, 3, 2, 5]).get_head()
     actual = Solution().reverseBetween(input1, input2, input3)
     print("Test case 1")
     print(actual)
     print(expected)
 
     # Test Case 2
-    input1 = LinkedList([5]).get_start()
+    input1 = LinkedList([5]).get_head()
     input2 = 1
     input3 = 1
-    expected = LinkedList([5]).get_start()
+    expected = LinkedList([5]).get_head()
     actual = Solution().reverseBetween(input1, input2, input3)
     print("Test case 2")
     print(actual)

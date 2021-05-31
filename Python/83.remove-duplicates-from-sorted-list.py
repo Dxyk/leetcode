@@ -123,16 +123,16 @@ class Solution:
 
 if __name__ == "__main__":
     # Test Case 1
-    input1 = LinkedList([1, 1, 2]).get_start()
-    expected = LinkedList([1, 2]).get_start()
+    input1 = LinkedList([1, 1, 2]).get_head()
+    expected = LinkedList([1, 2]).get_head()
     actual = Solution().deleteDuplicates(input1)
     print("Test case 1")
     print(actual)
     print(expected)
 
     # Test Case 2
-    input1 = LinkedList([1, 1, 2, 3, 3]).get_start()
-    expected = LinkedList([1, 2, 3]).get_start()
+    input1 = LinkedList([1, 1, 2, 3, 3]).get_head()
+    expected = LinkedList([1, 2, 3]).get_head()
     actual = Solution().deleteDuplicates(input1)
     print("Test case 2")
     print(actual)

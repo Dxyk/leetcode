@@ -161,18 +161,18 @@ class Solution:
 
 if __name__ == "__main__":
     # Test Case 1
-    input1 = LinkedList([1, 4, 3, 2, 5, 2]).get_start()
+    input1 = LinkedList([1, 4, 3, 2, 5, 2]).get_head()
     input2 = 3
-    expected = LinkedList([1, 2, 2, 4, 3, 5]).get_start()
+    expected = LinkedList([1, 2, 2, 4, 3, 5]).get_head()
     actual = Solution().partition(input1, input2)
     print("Test case 1")
     print(actual)
     print(expected)
 
     # Test Case 2
-    input1 = LinkedList([2, 1]).get_start()
+    input1 = LinkedList([2, 1]).get_head()
     input2 = 2
-    expected = LinkedList([1, 2]).get_start()
+    expected = LinkedList([1, 2]).get_head()
     actual = Solution().partition(input1, input2)
     print("Test case 1")
     print(actual)

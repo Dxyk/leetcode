@@ -108,7 +108,7 @@ if __name__ == "__main__":
     # Test Case 1
     input1 = LinkedList([1, 2, 3, 3, 4, 4, 5])
     expected = [1, 2, 5]
-    actual = Solution().deleteDuplicates(input1.get_start())
+    actual = Solution().deleteDuplicates(input1.get_head())
     print("Test case 1")
     print(actual)
     print(expected)
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     # Test Case 2
     input1 = LinkedList([1, 1, 1, 2, 3])
     expected = [2, 3]
-    actual = Solution().deleteDuplicates(input1.get_start())
+    actual = Solution().deleteDuplicates(input1.get_head())
     print("Test case 2")
     print(actual)
     print(expected)

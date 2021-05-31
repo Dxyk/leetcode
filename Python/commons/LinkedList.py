@@ -1,74 +1,96 @@
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Optional, TypeVar
+
+T = TypeVar('T')
 
 
 # LinkedList and ListNode Definitions
 class ListNode:
-    val: int
-    next: Union[ListNode, None]
+    """
+    A ListNode object in a Linked List.
 
-    def __init__(self, x: int):
+    This class is supported by LeetCode.
+
+    Attributes:
+    :param val: The value contained in the current node
+    :param next: The next node that is connected to the current node
+    """
+
+    val: T
+    next: Optional[ListNode]
+
+    def __init__(self, x: T, next_node: Optional[ListNode] = None):
         """
-        init a linked list node
+        Initialize a List Node.
 
-        :param x: the value contained in the node
+        Runtime: O(1)
+        Space: O(1)
+
+        :param x: The value contained in the node
+        :param next: The next list node connected to the current node
+                     NOTE: The next param is not supported by LeetCode
         """
         self.val = x
-        self.next = None
+        self.next = next_node
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        Returns the string format of the whole list following the current node
+        Returns the string format of the current List Node.
+        The whole list following the current node will be stringified
+        as well.
 
-        :return: the string representation of the ListNode
+        The format will be
+        `node1.val->node2.val->node3.val`
+
+        Runtime: O(n)
+        Space: O(n)
+
+        :return: The string representation of the ListNode
         """
         vals: List[str] = []
-        ptr = self
-        while ptr is not None:
-            vals.append(str(ptr.val))
-            ptr = ptr.next
+        curr: ListNode = self
+
+        while curr is not None:
+            vals.append(str(curr.val))
+            curr = curr.next
+
         return "->".join(vals)
 
 
 class LinkedList:
-    head: ListNode
+    """
+    A LinkedList containing multiple ListNodes.
 
-    def __init__(self, numbers: List[int]):
+    This class is used for testing, and is NOT supported by LeetCode.
+
+    Attributes:
+    :param head: The head of the LinkedList
+    """
+
+    _head: ListNode
+
+    def __init__(self, items: List[T]):
         """
-        init a linked list with numbers
+        Initialize a LinkedList base on a list
 
-        :param numbers: the list of numbers the LinkedList represents
+        Runtime: O(n)
+        Space: O(n)
+
+        :param items: The list of items in the LinkedList
         """
-        self.head = ListNode(0)
-        ptr = self.head
-        for n in numbers:
-            ptr.next = ListNode(n)
-            ptr = ptr.next
-        self.head = self.head.next
+        dummy = ListNode(None)
+        curr = dummy
+        for n in items:
+            curr.next = ListNode(n)
+            curr = curr.next
 
-    def get_start(self) -> ListNode:
+        self._head = dummy.next
+
+    def get_head(self) -> ListNode:
         """
-        Get the starting ListNode
+        Get the head ListNode
 
-        :return: the starting ListNode
+        :return: The head ListNode
         """
-        return self.head
-
-
-def create_list(lst: List[int]) -> ListNode:
-    dummy = ListNode(-1)
-    curr = dummy
-    for val in lst:
-        curr.next = ListNode(val)
-        curr = curr.next
-    return dummy.next
-
-
-def get_list(node: ListNode) -> List[int]:
-    curr = node
-    res = []
-    while curr is not None:
-        res.append(curr.val)
-        curr = curr.next
-    return res
+        return self._head

@@ -83,4 +83,4 @@ class Solution:
 
 if __name__ == '__main__':
     ll = LinkedList([0, 1, 2])
-    print(Solution().rotateRight(ll.get_start(), 4))
+    print(Solution().rotateRight(ll.get_head(), 4))
