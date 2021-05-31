@@ -49,7 +49,7 @@
 #
 #
 
-from Python.commons.BinaryTree import TreeNode, create_node, get_list
+from Python.commons.BinaryTree import BinaryTree, TreeNode
 
 
 # @lc code=start
@@ -164,17 +164,17 @@ class Solution:
 
 if __name__ == "__main__":
     # Test Case 1
-    input1 = create_node([1, 3, None, None, 2])
-    expected = create_node([3, 1, None, None, 2])
+    input1 = BinaryTree([1, 3, None, None, 2]).get_root()
+    expected = BinaryTree([3, 1, None, None, 2]).get_root()
     Solution().recoverTree(input1)
     print("Test case 1")
-    print(get_list(input1))
-    print(get_list(expected))
+    print(input1)
+    print(expected)
 
     # Test Case 2
-    input1 = create_node([3, 1, 4, None, None, 2])
-    expected = create_node([2, 1, 4, None, None, 3])
+    input1 = BinaryTree([3, 1, 4, None, None, 2]).get_root()
+    expected = BinaryTree([2, 1, 4, None, None, 3]).get_root()
     Solution().recoverTree(input1)
     print("Test case 2")
-    print(get_list(input1))
-    print(get_list(expected))
+    print(input1)
+    print(expected)
