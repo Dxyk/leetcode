@@ -14,7 +14,7 @@ def create_node(lst: List[int]) -> TreeNode:
     """
     if len(lst) == 0:
         return None
-    forest = [TreeNode(item) for item in lst]
+    forest = [TreeNode(item) if item else None for item in lst]
     count = len(forest)
     for i, tree in enumerate(forest):
         left_index = 2 * i + 1
