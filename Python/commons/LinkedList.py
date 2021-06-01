@@ -64,6 +64,8 @@ class LinkedList:
 
     This class is used for testing, and is NOT supported by LeetCode.
 
+    TODO: Add common algorithms
+
     Attributes:
     :param head: The head of the LinkedList
     """

@@ -84,6 +84,8 @@ class BinaryTree:
 
     This class is used for testing, and is NOT supported by LeetCode.
 
+    TODO: Add traversal algorithms (recursive and iterative)
+
     Attributes:
     :param root: The root of the BinaryTree
     """
