@@ -71,7 +71,8 @@ class TreeNode:
             curr_level.extend([None] * (2**height - len(curr_level)))
 
             # avoid last level of pure nulls
-            if queue and any(curr_level):
+            # cannot use any(curr_level) because it will skip 0
+            if queue and any([val is not None for val in curr_level]):
                 traversed.append(str(curr_level))
                 height += 1
 
